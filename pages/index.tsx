@@ -13,6 +13,29 @@ const GGLogo = () => (
   />
 );
 
+const VideoLoopComponent = (props: {
+  videoUrl: string;
+  posterUrl?: string;
+}) => {
+  const { videoUrl } = props;
+  return (
+    <video
+      autoPlay
+      loop
+      muted
+      style={{
+        position: "fixed",
+        width: "100vw",
+        objectFit: "cover",
+        height: "100vh",
+        zIndex: "-1",
+      }}
+    >
+      <source src={videoUrl} type="video/mp4" />
+    </video>
+  );
+};
+
 export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(0);
 
@@ -47,6 +70,7 @@ export default function Home() {
           height={"100vh"}
           padding={0}
         >
+          <VideoLoopComponent videoUrl="/videos/nintendoeshop-loop.mp4" />
           <h1>Slide 1</h1>
         </Grid>
         <Grid
@@ -57,6 +81,7 @@ export default function Home() {
           height={"100vh"}
           padding={0}
         >
+          <VideoLoopComponent videoUrl="/videos/scifi-blocks-loop.mp4" />
           <h1>Slide 2</h1>
         </Grid>
         <Grid
@@ -67,6 +92,7 @@ export default function Home() {
           height={"100vh"}
           padding={0}
         >
+          <VideoLoopComponent videoUrl="/videos/playstation-lights-loop.mp4" />
           <h1>Slide 3</h1>
         </Grid>
       </SwipeableViews>
