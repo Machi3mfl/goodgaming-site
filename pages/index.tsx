@@ -2,7 +2,7 @@ import Image from "next/image";
 import Grid from "@mui/material/Grid";
 import mainLogo from "../public/images/logo-horizontal-dswhite.png";
 import { useState } from "react";
-import SwipeableViews from "react-swipeable-views";
+import SwipeableViews from "../src/packages/react-swipeable-views/src";
 
 const GGLogo = () => (
   <Image
