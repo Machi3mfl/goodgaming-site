@@ -11,6 +11,7 @@ import marioBrick from "../public/images/super-mario-brick.png";
 
 // playstation
 import playstationLogo from "../public/images/logos/pstore-logo.png";
+import StoreButtons from "@/src/components/StoreButtons";
 
 const GGLogo = () => (
   <Image
@@ -20,6 +21,8 @@ const GGLogo = () => (
     style={{ width: "100%", height: "auto", cursor: "pointer" }}
   />
 );
+
+
 
 const VideoLoopComponent = (props: {
   videoUrl: string;
@@ -66,6 +69,21 @@ export default function Home() {
       "_blank"
     );
   };
+
+  const buttonsStore = [
+    {
+      url: "/images/nintendo-switch-eshop.jpg",
+      title: "Nintendo eShop",
+      width: "50%",
+      onClick: () => setCarouselIndex(0),
+    },
+    {
+      url: "/images/playstation-logo-buttons-blue.jpg",
+      title: "Playstation Store",
+      width: "50%",
+      onClick: () => setCarouselIndex(2),
+    },
+  ];
 
   return (
     <>
@@ -147,7 +165,23 @@ export default function Home() {
         >
           <VideoLoopComponent videoUrl="/videos/scifi-blocks-loop.mp4" />
           {/* Main slide */}
-          <h1>Slide 2</h1>
+          {carouselIndex === 1 && (
+            <Grid lg={5} container justifyContent="center" alignItems="center">
+                <h1
+                  style={{
+                    zIndex: 9999,
+                    fontFamily: "Sofia Sans Extra Condensed",
+                    fontSize: "3.5rem",
+                    textTransform: "uppercase",
+                    margin: 0,
+                    color: "white",
+                  }}
+                >
+                  Nuestras tarjetas digitales
+                </h1>
+              <StoreButtons buttonsDefinition={buttonsStore} />
+            </Grid>
+          )}
         </Grid>
         <Grid
           container
