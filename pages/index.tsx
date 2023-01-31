@@ -104,7 +104,7 @@ export default function Home() {
       <Grid
         container
         columns={16}
-        height={"20vh"}
+       height={"20vh"}
         sx={{ position: "absolute", top: 0, left: 0, zIndex: 100 }}
         padding={4}
       >
@@ -192,12 +192,11 @@ export default function Home() {
           <VideoLoopComponent videoUrl="/videos/scifi-blocks-loop.mp4" />
           {/* Main slide */}
           {carouselIndex === 1 && (
-            <Grid lg={5} container justifyContent="center" alignItems="center">
+            <Grid container lg={5} xs={8} md={8} justifyContent="center" alignItems="center">
                 <h1
                   style={{
                     zIndex: 9999,
                     fontFamily: "Sofia Sans Extra Condensed",
-                    fontSize: "3.5rem",
                     textTransform: "uppercase",
                     margin: 0,
                     color: "white",
