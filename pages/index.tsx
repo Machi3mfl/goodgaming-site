@@ -178,6 +178,7 @@ export default function Home() {
                 zIndex: 9999,
                 animation: "flicker 1.5s infinite alternate",
                 fontFamily: "Play",
+                color: "white",
                 fontSize: "2.3rem",
                 marginBottom: "4rem",
                 fontWeight: "bold",
