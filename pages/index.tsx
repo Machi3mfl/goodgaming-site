@@ -9,6 +9,9 @@ import { Stack } from "@mui/material";
 import marioJump from "../public/images/mario-super-jump-loop.gif";
 import marioBrick from "../public/images/super-mario-brick.png";
 
+// playstation
+import playstationLogo from "../public/images/logos/pstore-logo.png";
+
 const GGLogo = () => (
   <Image
     src={mainLogo}
@@ -23,8 +26,8 @@ const VideoLoopComponent = (props: {
   posterUrl?: string;
 }) => {
   const { videoUrl } = props;
-  const isProd = process.env.NODE_ENV === 'production';
-  const pathPrefix = isProd ? '/goodgaming-site' : '';
+  const isProd = process.env.NODE_ENV === "production";
+  const pathPrefix = isProd ? "/goodgaming-site" : "";
   return (
     <video
       autoPlay
@@ -57,6 +60,13 @@ export default function Home() {
     );
   };
 
+  const redirectToStorePlaystation = () => {
+    window.open(
+      "https://goodgaming.mercadoshops.com.ar/listado/consolas-videojuegos/accesorios-consolas/playstation_OrderId_PRICE_NoIndex_True",
+      "_blank"
+    );
+  };
+
   return (
     <>
       <Grid
@@ -76,6 +86,7 @@ export default function Home() {
         onChangeIndex={handleChangeIndex}
         enableMouseEvents
       >
+        {/* Nintendo slide */}
         <Grid
           container
           direction="row"
@@ -124,7 +135,7 @@ export default function Home() {
             >
               {">> Comprar aqui <<"}
             </h3>
-            </Stack>
+          </Stack>
         </Grid>
         <Grid
           container
@@ -135,18 +146,49 @@ export default function Home() {
           padding={0}
         >
           <VideoLoopComponent videoUrl="/videos/scifi-blocks-loop.mp4" />
+          {/* Main slide */}
           <h1>Slide 2</h1>
         </Grid>
         <Grid
           container
           direction="row"
           justifyContent="center"
-          alignItems="center"
+          alignItems="end"
           height={"100vh"}
           padding={0}
         >
           <VideoLoopComponent videoUrl="/videos/playstation-lights-loop.mp4" />
-          <h1>Slide 3</h1>
+          {/* Playstation slide */}
+          <Stack justifyContent="center" alignItems="center">
+            <Image
+              alt="Playstation store logo"
+              src={playstationLogo}
+              width={65}
+              height={80}
+              style={{
+                zIndex: 9999,
+                animation: "flickerImg 1.5s infinite alternate",
+                position: "relative",
+                cursor: "pointer",
+              }}
+              onClick={redirectToStorePlaystation}
+            />
+            <span
+              style={{
+                zIndex: 9999,
+                animation: "flicker 1.5s infinite alternate",
+                fontFamily: "Play",
+                fontSize: "2.3rem",
+                marginBottom: "4rem",
+                fontWeight: "bold",
+                textTransform: "uppercase",
+                cursor: "pointer",
+              }}
+              onClick={redirectToStorePlaystation}
+            >
+              {"Comprar aquí"}
+            </span>
+          </Stack>
         </Grid>
       </SwipeableViews>
     </>
