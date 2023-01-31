@@ -12,6 +12,7 @@ import marioBrick from "../public/images/super-mario-brick.png";
 // playstation
 import playstationLogo from "../public/images/logos/pstore-logo.png";
 import StoreButtons from "@/src/components/StoreButtons";
+import SocialButtons from "@/src/components/SocialButtons";
 
 const GGLogo = () => (
   <Image
@@ -50,7 +51,7 @@ const VideoLoopComponent = (props: {
 };
 
 export default function Home() {
-  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [carouselIndex, setCarouselIndex] = useState(1);
 
   const handleChangeIndex = (index: number) => {
     setCarouselIndex(index);
@@ -86,7 +87,20 @@ export default function Home() {
   ];
 
   return (
-    <>
+    <div
+      tabIndex={0}
+      onKeyDown={(e) => {
+        const { key } = e;
+        if (key === "ArrowRight") {
+          carouselIndex === 0 && setCarouselIndex(1);
+          carouselIndex === 1 && setCarouselIndex(2);
+        }
+        if (key === "ArrowLeft") {
+          carouselIndex === 1 && setCarouselIndex(0);
+          carouselIndex === 2 && setCarouselIndex(1);
+        }
+      }}
+    >
       <Grid
         container
         columns={16}
@@ -94,8 +108,20 @@ export default function Home() {
         sx={{ position: "absolute", top: 0, left: 0, zIndex: 100 }}
         padding={4}
       >
-        <Grid item xs={8} md={4} lg={4} onClick={() => setCarouselIndex(2)}>
+        <Grid item xs={8} md={4} lg={4} onClick={() => setCarouselIndex(1)}>
           <GGLogo />
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          md={9}
+          lg={9}
+          container
+          direction="row"
+          justifyContent="flex-end"
+          alignItems="center"
+        >
+          <SocialButtons />
         </Grid>
       </Grid>
       <SwipeableViews
@@ -226,6 +252,6 @@ export default function Home() {
           </Stack>
         </Grid>
       </SwipeableViews>
-    </>
+    </div>
   );
 }
