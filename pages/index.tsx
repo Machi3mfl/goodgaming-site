@@ -18,6 +18,8 @@ const VideoLoopComponent = (props: {
   posterUrl?: string;
 }) => {
   const { videoUrl } = props;
+  const isProd = process.env.NODE_ENV === 'production';
+  const pathPrefix = isProd ? '/goodgaming-site' : '';
   return (
     <video
       autoPlay
@@ -31,7 +33,7 @@ const VideoLoopComponent = (props: {
         zIndex: "-1",
       }}
     >
-      <source src={videoUrl} type="video/mp4" />
+      <source src={`${pathPrefix}${videoUrl}`} type="video/mp4" />
     </video>
   );
 };
