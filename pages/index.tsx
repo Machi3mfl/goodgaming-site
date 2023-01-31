@@ -3,6 +3,11 @@ import Grid from "@mui/material/Grid";
 import mainLogo from "../public/images/logo-horizontal-dswhite.png";
 import { useState } from "react";
 import SwipeableViews from "../src/packages/react-swipeable-views/src";
+import { Stack } from "@mui/material";
+
+// nintendo images
+import marioJump from "../public/images/mario-super-jump-loop.gif";
+import marioBrick from "../public/images/super-mario-brick.png";
 
 const GGLogo = () => (
   <Image
@@ -45,6 +50,13 @@ export default function Home() {
     setCarouselIndex(index);
   };
 
+  const redirectToStoreNintendo = () => {
+    window.open(
+      "https://goodgaming.mercadoshops.com.ar/listado/consolas-videojuegos/accesorios-consolas/nintendo_OrderId_PRICE_NoIndex_True",
+      "_blank"
+    );
+  };
+
   return (
     <>
       <Grid
@@ -73,7 +85,46 @@ export default function Home() {
           padding={0}
         >
           <VideoLoopComponent videoUrl="/videos/nintendoeshop-loop.mp4" />
-          <h1>Slide 1</h1>
+          <Stack justifyContent="center" alignItems="center">
+            <Image
+              alt="super mario jump"
+              src={marioJump}
+              width={220}
+              height={263}
+              style={{ zIndex: 9999 }}
+            />
+            <Image
+              alt="super mario brick"
+              src={marioBrick}
+              width={350}
+              height={75}
+              style={{
+                zIndex: 9999,
+                position: "relative",
+                bottom: "3px",
+                animation: "MoveUpDown 0.5s linear infinite",
+                cursor: "pointer",
+              }}
+              onClick={redirectToStoreNintendo}
+            />
+            <h3
+              style={{
+                position: "relative",
+                bottom: "75px",
+                zIndex: 9999,
+                fontSize: "1.2rem",
+                textTransform: "uppercase",
+                textShadow: "1px 1px 2px black, 0 0 1em black, 0 0 0.2em black",
+                color: "white",
+                cursor: "pointer",
+                fontFamily: "Press Start 2P",
+                animation: "MoveUpDown 0.5s linear infinite",
+              }}
+              onClick={redirectToStoreNintendo}
+            >
+              {">> Comprar aqui <<"}
+            </h3>
+            </Stack>
         </Grid>
         <Grid
           container
