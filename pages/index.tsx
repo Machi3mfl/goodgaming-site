@@ -23,8 +23,6 @@ const GGLogo = () => (
   />
 );
 
-
-
 const VideoLoopComponent = (props: {
   videoUrl: string;
   posterUrl?: string;

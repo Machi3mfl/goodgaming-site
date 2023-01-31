@@ -79,7 +79,8 @@ interface StoreButtonsProps {
 
 export default function StoreButtons(props: StoreButtonsProps) {
   const { buttonsDefinition } = props;
-
+  const isProd = process.env.NODE_ENV === "production";
+  const pathPrefix = isProd ? "/goodgaming-site" : "";
   return (
       <Box
         sx={{
@@ -107,7 +108,7 @@ export default function StoreButtons(props: StoreButtonsProps) {
                 }
             }}
           >
-            <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
+            <ImageSrc style={{ backgroundImage: `url(${pathPrefix}${image.url})` }} />
             <ImageBackdrop className="MuiImageBackdrop-root" />
             <Image>
               <Typography
