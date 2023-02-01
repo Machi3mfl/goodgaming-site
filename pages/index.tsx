@@ -10,7 +10,6 @@ import marioJump from "../public/images/mario-super-jump-loop.gif";
 import marioBrick from "../public/images/super-mario-brick.png";
 
 // playstation
-import playstationLogo from "../public/images/logos/pstore-logo.png";
 import StoreButtons from "@/src/components/StoreButtons";
 import SocialButtons from "@/src/components/SocialButtons";
 import playstationBackground from "../public/videos/psn-store-loop.gif";
@@ -107,26 +106,37 @@ export default function Home() {
         sx={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
         padding={4}
       >
-        <Grid 
+        <Grid
           container
           direction="row"
-          justifyContent={{ lg: "flex-start", md: "flex-start", sm: "flex-start", xs: "center" }}
+          justifyContent={{
+            lg: "flex-start",
+            md: "flex-start",
+            sm: "flex-start",
+            xs: "center",
+          }}
           alignItems="center"
-          xs={12} 
+          lg={3}
+          md={3}
           sm={6}
-          md={4} 
-          lg={4} 
-          onClick={() => setCarouselIndex(1)}>
+          xs={12}
+          onClick={() => setCarouselIndex(1)}
+        >
           <GGLogo />
         </Grid>
         <Grid
-          xs={12}
+          lg={9}
+          md={9}
           sm={6}
-          md={8}
-          lg={8}
+          xs={12}
           container
           direction="row"
-          justifyContent={{ lg: "flex-end", md: "flex-end", sm: "flex-end", xs: "center" }}
+          justifyContent={{
+            lg: "flex-end",
+            md: "flex-end",
+            sm: "flex-end",
+            xs: "center",
+          }}
           alignItems="center"
         >
           <SocialButtons />
@@ -245,7 +255,8 @@ export default function Home() {
           {/* Playstation slide */}
           <Stack justifyContent="center" alignItems="center">
             <span
-              style={{                animation: "flicker 1.5s infinite alternate",
+              style={{
+                animation: "flicker 1.5s infinite alternate",
                 fontFamily: "Play",
                 color: "white",
                 fontSize: "2.3rem",
