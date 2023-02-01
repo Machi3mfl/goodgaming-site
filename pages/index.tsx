@@ -8,11 +8,14 @@ import { Stack } from "@mui/material";
 // nintendo images
 import marioJump from "../public/images/mario-super-jump-loop.gif";
 import marioBrick from "../public/images/super-mario-brick.png";
+import nintendoBackground from '../public/videos/nintendo-eshop-background.gif';
 
 // playstation
 import StoreButtons from "@/src/components/StoreButtons";
 import SocialButtons from "@/src/components/SocialButtons";
 import playstationBackground from "../public/videos/psn-store-loop.gif";
+
+import swipeAnimation from "../public/images/swipe-animation.gif";
 
 const GGLogo = () => (
   <Image
@@ -142,6 +145,24 @@ export default function Home() {
           <SocialButtons />
         </Grid>
       </Grid>
+      {[0, 2].includes(carouselIndex) && (
+        <Image
+          src={swipeAnimation}
+          className="hideMe"
+          style={{
+            position: "absolute",
+            bottom: 0,
+            right: 0,
+            left: 0,
+            margin: "auto",
+            top: 0,
+            zIndex: 1,
+            height: "25vh",
+            width: "auto",
+          }}
+          alt="swipe slides"
+        />
+      )}
       <SwipeableViews
         index={carouselIndex}
         default
@@ -157,7 +178,19 @@ export default function Home() {
           height={"100vh"}
           padding={0}
         >
-          <VideoLoopComponent videoUrl="/videos/nintendoeshop-loop.mp4" />
+          <Image
+            alt="Nintendo eshop background"
+            src={nintendoBackground}
+            width={65}
+            height={80}
+            style={{
+              position: "fixed",
+              width: "100vw",
+              objectFit: "cover",
+              height: "100vh",
+              zIndex: "-1",
+            }}
+          />
           <Stack justifyContent="center" alignItems="center">
             <Image
               alt="super mario jump"
@@ -204,6 +237,19 @@ export default function Home() {
           height={"100vh"}
           padding={0}
         >
+          {/*<Image
+            alt="Good gaming background"
+            src={homeBackground}
+            width={65}
+            height={80}
+            style={{
+              position: "fixed",
+              width: "100vw",
+              objectFit: "cover",
+              height: "100vh",
+              zIndex: "-1",
+            }}
+          /> */}
           <VideoLoopComponent videoUrl="/videos/scifi-blocks-loop.mp4" />
           {/* Main slide */}
           {carouselIndex === 1 && (
@@ -239,7 +285,7 @@ export default function Home() {
           padding={0}
         >
           <Image
-            alt="Playstation store backgroud"
+            alt="Playstation store background"
             src={playstationBackground}
             width={65}
             height={80}
