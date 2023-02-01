@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Grid from "@mui/material/Grid";
 import mainLogo from "../public/images/logo-horizontal-dswhite.png";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SwipeableViews from "../src/packages/react-swipeable-views/src";
 import { Stack } from "@mui/material";
 
@@ -28,6 +28,38 @@ const GGLogo = () => (
     style={{ width: "100%", height: "auto", cursor: "pointer" }}
   />
 );
+
+const VideoLoopComponent = (props: {
+  videoUrl: string;
+  posterUrl?: string;
+}) => {
+  const { videoUrl } = props;
+  const isProd = process.env.NODE_ENV === "production";
+  const pathPrefix = isProd ? "/goodgaming-site" : "";
+  const vidRef = useRef(null);
+
+  useEffect(() => {
+    if(vidRef?.current) vidRef.current.play();
+  }, []);
+
+  return (
+    <video
+      autoPlay
+      loop
+      muted
+      style={{
+        position: "fixed",
+        width: "100vw",
+        objectFit: "cover",
+        height: "100vh",
+        zIndex: "-1",
+      }}
+      ref={vidRef}
+    >
+      <source src={`${pathPrefix}${videoUrl}`} type="video/mp4" />
+    </video>
+  );
+};
 
 export default function Home() {
   const [carouselIndex, setCarouselIndex] = useState(1);
@@ -214,7 +246,7 @@ export default function Home() {
           height={"100vh"}
           padding={0}
         >
-          <Image
+          {/*<Image
             alt="Good gaming background"
             src={homeBackground}
             width={65}
@@ -226,7 +258,8 @@ export default function Home() {
               height: "100vh",
               zIndex: "-1",
             }}
-          />
+          />*/}
+          <VideoLoopComponent videoUrl="/videos/scifi-blocks-loop.mp4" />
           {/* Main slide */}
           {carouselIndex === 1 && (
             <Grid
