@@ -151,7 +151,7 @@ export default function Home() {
           className="hideMe"
           style={{
             position: "absolute",
-            bottom: "3rem",
+            bottom: "1rem",
             right: 0,
             left: 0,
             margin: "auto",
