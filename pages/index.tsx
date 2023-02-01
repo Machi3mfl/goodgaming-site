@@ -36,7 +36,7 @@ const VideoLoopComponent = (props: {
   const { videoUrl } = props;
   const isProd = process.env.NODE_ENV === "production";
   const pathPrefix = isProd ? "/goodgaming-site" : "";
-  const vidRef = useRef(null);
+  const vidRef: any = useRef(null);
 
   useEffect(() => {
     if(vidRef?.current) vidRef.current.play();
