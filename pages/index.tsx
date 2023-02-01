@@ -13,6 +13,7 @@ import marioBrick from "../public/images/super-mario-brick.png";
 import playstationLogo from "../public/images/logos/pstore-logo.png";
 import StoreButtons from "@/src/components/StoreButtons";
 import SocialButtons from "@/src/components/SocialButtons";
+import playstationBackground from "../public/videos/psn-store-loop.gif";
 
 const GGLogo = () => (
   <Image
@@ -102,21 +103,30 @@ export default function Home() {
       <Grid
         container
         columns={16}
-       height={"20vh"}
-        sx={{ position: "absolute", top: 0, left: 0, zIndex: 100 }}
+        height={"20vh"}
+        sx={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
         padding={4}
       >
-        <Grid item xs={8} md={4} lg={4} onClick={() => setCarouselIndex(1)}>
+        <Grid 
+          container
+          direction="row"
+          justifyContent={{ lg: "flex-start", md: "flex-start", sm: "flex-start", xs: "center" }}
+          alignItems="center"
+          xs={12} 
+          sm={6}
+          md={4} 
+          lg={4} 
+          onClick={() => setCarouselIndex(1)}>
           <GGLogo />
         </Grid>
         <Grid
-          item
-          xs={6}
-          md={9}
-          lg={9}
+          xs={12}
+          sm={6}
+          md={8}
+          lg={8}
           container
           direction="row"
-          justifyContent="flex-end"
+          justifyContent={{ lg: "flex-end", md: "flex-end", sm: "flex-end", xs: "center" }}
           alignItems="center"
         >
           <SocialButtons />
@@ -144,7 +154,6 @@ export default function Home() {
               src={marioJump}
               width={220}
               height={263}
-              style={{ zIndex: 9999 }}
             />
             <Image
               alt="super mario brick"
@@ -152,7 +161,6 @@ export default function Home() {
               width={350}
               height={75}
               style={{
-                zIndex: 9999,
                 position: "relative",
                 bottom: "3px",
                 animation: "MoveUpDown 0.5s linear infinite",
@@ -164,7 +172,6 @@ export default function Home() {
               style={{
                 position: "relative",
                 bottom: "75px",
-                zIndex: 9999,
                 fontSize: "1.2rem",
                 textTransform: "uppercase",
                 textShadow: "1px 1px 2px black, 0 0 1em black, 0 0 0.2em black",
@@ -190,18 +197,25 @@ export default function Home() {
           <VideoLoopComponent videoUrl="/videos/scifi-blocks-loop.mp4" />
           {/* Main slide */}
           {carouselIndex === 1 && (
-            <Grid container lg={5} xs={8} md={8} justifyContent="center" alignItems="center">
-                <h1
-                  style={{
-                    zIndex: 9999,
-                    fontFamily: "Sofia Sans Extra Condensed",
-                    textTransform: "uppercase",
-                    margin: 0,
-                    color: "white",
-                  }}
-                >
-                  Nuestras tarjetas digitales
-                </h1>
+            <Grid
+              container
+              lg={5}
+              xs={8}
+              md={8}
+              justifyContent="center"
+              alignItems="center"
+            >
+              <h1
+                style={{
+                  fontFamily: "Sofia Sans Extra Condensed",
+                  textTransform: "uppercase",
+                  margin: 0,
+                  color: "white",
+                  fontSize: "2.5rem",
+                }}
+              >
+                Tarjetas digitales
+              </h1>
               <StoreButtons buttonsDefinition={buttonsStore} />
             </Grid>
           )}
@@ -210,34 +224,32 @@ export default function Home() {
           container
           direction="row"
           justifyContent="center"
-          alignItems="end"
+          alignItems="center"
           height={"100vh"}
           padding={0}
         >
-          <VideoLoopComponent videoUrl="/videos/playstation-lights-loop.mp4" />
+          <Image
+            alt="Playstation store backgroud"
+            src={playstationBackground}
+            width={65}
+            height={80}
+            style={{
+              position: "fixed",
+              width: "100vw",
+              objectFit: "cover",
+              height: "100vh",
+              zIndex: "-1",
+            }}
+          />
+
           {/* Playstation slide */}
           <Stack justifyContent="center" alignItems="center">
-            <Image
-              alt="Playstation store logo"
-              src={playstationLogo}
-              width={65}
-              height={80}
-              style={{
-                zIndex: 9999,
-                animation: "flickerImg 1.5s infinite alternate",
-                position: "relative",
-                cursor: "pointer",
-              }}
-              onClick={redirectToStorePlaystation}
-            />
             <span
-              style={{
-                zIndex: 9999,
-                animation: "flicker 1.5s infinite alternate",
+              style={{                animation: "flicker 1.5s infinite alternate",
                 fontFamily: "Play",
                 color: "white",
                 fontSize: "2.3rem",
-                marginBottom: "4rem",
+                marginTop: "15rem",
                 fontWeight: "bold",
                 textTransform: "uppercase",
                 cursor: "pointer",
