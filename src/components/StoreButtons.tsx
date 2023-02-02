@@ -108,7 +108,7 @@ export default function StoreButtons(props: StoreButtonsProps) {
                 }
             }}
           >
-            <ImageSrc style={{ backgroundImage: `url(${pathPrefix}${image.url})` }} />
+            <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
             <ImageBackdrop className="MuiImageBackdrop-root" />
             <Image>
               <Typography
