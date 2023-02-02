@@ -113,14 +113,13 @@ export default function StoreButtons(props: StoreButtonsProps) {
             <Image>
               <Typography
                 component="span"
-                variant="h4"
+                variant="h5"
                 color="inherit"
                 sx={{
                   position: "relative",
                   p: 4,
                   pt: 2,
-                  pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-                  fontFamily: 'Sofia Sans Extra Condensed'
+                  pb: (theme) => `calc(${theme.spacing(1)} + 6px)`
                 }}
               >
                 {image.title}
