@@ -1,16 +1,7 @@
 body {
   font-family: 'Press Start 2P', 'Play', 'Sofia Sans Extra Condensed', 'Roboto';
   margin: 0;
-  color: "white"
-}
-
-.neonBoxShadow {
-  box-shadow: 0 0 .2rem #fff,
-  0 0 .2rem #fff,
-  0 0 2rem #bc13fe,
-  0 0 0.8rem #bc13fe,
-  0 0 2.8rem #bc13fe,
-  inset 0 0 1.3rem #bc13fe; 
+  color: white !important;
 }
 
 @keyframes MoveUpDown {
@@ -88,7 +79,6 @@ body {
   }    
 }
 
-
 @keyframes flickerImg {
   
   0%, 18%, 22%, 25%, 53%, 57%, 100% {
@@ -104,17 +94,15 @@ body {
   }    
 }
 
-.hideMe {
-  -moz-animation: cssAnimation 0s ease-in 5s forwards;
-  /* Firefox */
-  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
-  /* Safari and Chrome */
-  -o-animation: cssAnimation 0s ease-in 5s forwards;
-  /* Opera */
-  animation: cssAnimation 0s ease-in 5s forwards;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
+.neonBoxShadow {
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 2rem #bc13fe,
+  0 0 0.8rem #bc13fe,
+  0 0 2.8rem #bc13fe,
+  inset 0 0 1.3rem #bc13fe; 
 }
+
 @keyframes cssAnimation {
   to {
       width:0;
@@ -128,4 +116,67 @@ body {
       height:0;
       visibility:hidden;
   }
+}
+
+.hideMe {
+  -moz-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 5s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 5s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  position: absolute;
+  bottom: 1rem;
+  right: 0;
+  left: 0;
+  margin: auto;
+  zIndex: 1;
+  height: 25vh;
+  width: auto;
+}
+
+.backgroundSlide {
+  position: fixed;
+  width: 100vw;
+  object-fit: cover;
+  height: 100vh;
+  z-index: -1;
+}
+
+.nintendoBrickAnimation {
+  position: relative;
+  bottom: 3px;
+  animation: MoveUpDown 0.5s linear infinite;
+  cursor: pointer;
+}
+
+.nintendoFont {
+  position: relative;
+  bottom: 75px;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+  text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
+  cursor: pointer;
+  font-family: Press Start 2P;
+}
+
+.homeFont {
+  font-family: Sofia Sans Extra Condensed;
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.playstationFont {
+  animation: flicker 1.5s infinite alternate;
+  font-family: Play;
+  font-size: 2.3rem;
+  margin-top: 15rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
 }
