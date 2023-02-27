@@ -7,7 +7,7 @@ import nintendoBackground from "@/public/videos/nintendo-eshop-background.gif";
 
 const redirectToStoreNintendo = () => {
   window.open(
-    "https://goodgaming.mercadoshops.com.ar/listado/consolas-videojuegos/accesorios-consolas/nintendo_OrderId_PRICE_NoIndex_True",
+    "https://listado.mercadolibre.com.ar/consolas-videojuegos/accesorios-consolas/nintendo/_CustId_733724225",
     "_blank"
   );
 };
