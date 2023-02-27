@@ -4,7 +4,7 @@ import playstationBackground from "@/public/videos/psn-store-loop.gif";
 
 const redirectToStorePlaystation = () => {
   window.open(
-    "https://goodgaming.mercadoshops.com.ar/listado/consolas-videojuegos/accesorios-consolas/playstation_OrderId_PRICE_NoIndex_True",
+    "https://listado.mercadolibre.com.ar/consolas-videojuegos/accesorios-consolas/playstation/_CustId_733724225",
     "_blank"
   );
 };
