@@ -12,7 +12,7 @@ const SocialButtons = () => {
           <Tooltip title="Mercadolibre">
             <IconButton
               size="large"
-              href="https://goodgaming.mercadoshops.com.ar/"
+              href="https://listado.mercadolibre.com.ar/_CustId_733724225"
               target="_blank"
             >
               <Image
