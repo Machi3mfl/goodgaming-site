@@ -31,13 +31,13 @@ export default function Home() {
 
   const buttonsStore = [
     {
-      url: "/images/nintendo-switch-eshop.jpg",
+      url: "/images/nintendo-switch-eshop.jpeg",
       title: "Nintendo eShop",
       width: "50%",
       onClick: () => setCarouselIndex(0),
     },
     {
-      url: "/images/playstation-logo-buttons-blue.jpg",
+      url: "/images/playstation-logo-buttons-blue.jpeg",
       title: "Playstation Store",
       width: "50%",
       onClick: () => setCarouselIndex(2),

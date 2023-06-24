@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import Image from "next/image";
 // nintendo images
-import marioJump from "@/public/images/mario-super-jump-loop.gif";
+import marioJump from "@/public/images/mario-jump-light.gif";
 import marioBrick from "@/public/images/super-mario-brick.png";
 import nintendoBackground from "@/public/videos/nintendo-eshop-background.gif";
 
