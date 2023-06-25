@@ -237,7 +237,7 @@ export interface IFeedbackClean {
 
 export const getStaticProps = async () => {
   const FEEDBACK_URL =
-    "https://www.mercadolibre.com.ar/perfil/api/feedback/askForFeedback?userIdentifier=nickname%3DGOODGAMING.DIGITALSTORE&rating=all&limit=50&offset=0&role=seller";
+    "https://www.mercadolibre.com.ar/perfil/api/feedback/askForFeedback?userIdentifier=nickname%3DGOODGAMING.DIGITALSTORE&rating=all&limit=60&offset=0&role=seller";
 
   const response = await fetch(FEEDBACK_URL);
 

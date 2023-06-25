@@ -1,6 +1,5 @@
 // add a array with colors without repeating the colors
 const colors = [
-  /*
   "#0088FE",
   "#00C49F",
   "#FF8042",
@@ -15,7 +14,6 @@ const colors = [
   "#A52A2A",
   "#800080",
   "#FF00FF",
-  */
   "#CF0580",
   "#1708C5",
   "#49ABC7",
@@ -41,155 +39,75 @@ function Slideshow(props: ISlideshowProps) {
   // show only 6 items per time in the slideshow
   // when the 6 items are shown, the slideshow will start again and show the next 6 items
   // when all the items are shown, the slideshow will start again and show the first 6 items
-  function resetTimeout() {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-  }
-
-  React.useEffect(() => {
-    resetTimeout();
-    const timeoutId = setTimeout(
-      () =>
-        setIndex((prevIndex) =>
-          prevIndex === items.length - 1 ? 0 : prevIndex + 1
-        ),
-      delay
-    );
-    timeoutRef.current = timeoutId;
-
-    return () => {
-      resetTimeout();
-    };
-  }, [index, items.length]);
-
-  function stringToColor(string: string) {
-    let hash = 0;
-    let i;
-
-    /* eslint-disable no-bitwise */
-    for (i = 0; i < string.length; i += 1) {
-      hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-
-    let color = "#";
-
-    for (i = 0; i < 3; i += 1) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += `00${value.toString(16)}`.slice(-2);
-    }
-    /* eslint-enable no-bitwise */
-
-    return color;
-  }
-
-  function stringAvatar(name: string) {
+  function stringAvatar(name: string, index: number) {
     return {
       sx: {
-        bgcolor: stringToColor(name),
+        bgcolor: colors[index % colors.length],
       },
       children: `${name[0].toUpperCase()}${name[5].toUpperCase()}`,
     };
   }
 
   return (
-    <div className="slideshow">
-      <div
-        className="slideshowSlider"
-        style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
-      >
+    <div className="slider">
+      <div className="slide-track" style={{
+        animation: "scroll 40s linear infinite",
+        display: "flex",
+        width: `calc(380px * ${itemsToShow.length})`,
+        height: "100%"
+      }}>
         {itemsToShow.map((item, index) => (
           <div className="slide" key={index}>
-            <Paper
+            <Grid
+              container
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              justifyItems="center"
+              height={"100%"}
+              p={2}
               sx={{
-                p: 3,
-                margin: "auto",
-                backgroundColor: colors[index % colors.length],
-                height: "9rem",
-                color: "white",
-                backgroundImage: `url(/images/opinions-background-3.png)`,
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
+                backgroundColor: "#250171",
               }}
             >
-              <Grid
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-                justifyItems="center"
-              >
-                <Grid item xs={12} display="flex" justifyContent="center" mb={1}>
-                  <Avatar {...stringAvatar(item.user)} sizes="lg"/>
-                </Grid>
-                <Grid item xs={12} textAlign="center">
-                  <Typography
-                    variant="subtitle2"
-                    style={{
-                      textShadow:
-                        "1px 1px 1px gray, 0 0 35px gray, 0 0 5px gray",
-                    }}
-                  >
-                    {item.user}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} textAlign="center">
-                  <Typography
-                    variant="h6"
-                    gutterBottom
-                    style={{
-                      textShadow:
-                        "1px 1px 1px gray, 0 0 35px gray, 0 0 5px gray",
-                    }}
-
-                    fontSize={{
-                      lg: "1.4rem",
-                      md: "1.4rem",
-                      sm: "1rem",
-                      xs: "1rem",
-                    }}
-                  >
-                    {'"' + item.message + '"'}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} display="flex" justifyContent="center">
-                  <Rating
-                    name="read-only"
-                    value={5}
-                    readOnly
-                    style={{ width: "auto" }}
-                    size="large"
-                  />
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  textAlign="center"
+              <Grid item xs={12} display="flex" justifyContent="center" mb={1}>
+                <Avatar {...stringAvatar(item.user, index)} sizes="lg" />
+              </Grid>
+              <Grid item xs={12} textAlign="center">
+                <Typography variant="caption" fontWeight="light">
+                  {item.user}
+                </Typography>
+              </Grid>
+              <Grid item xs={12} textAlign="center" zeroMinWidth>
+                <Typography
+                  variant="h6"
                   style={{
-                    textShadow: "1px 1px 1px gray, 0 0 35px gray, 0 0 5px gray",
+                    overflowWrap: "break-word",
+                    wordBreak: "break-word",
+                    lineHeight: "1.2rem",
                   }}
                 >
-                  <Typography variant="body2">{item.date}</Typography>
-                </Grid>
-                
+                  {'"' + item.message + '"'}
+                </Typography>
               </Grid>
-            </Paper>
+              <Grid item xs={12} display="flex" justifyContent="center">
+                <Rating
+                  name="read-only"
+                  value={5}
+                  readOnly
+                  style={{ width: "auto" }}
+                  size="large"
+                />
+              </Grid>
+              <Grid item xs={12} textAlign="center">
+                <Typography variant="caption" fontWeight="light">
+                  {item.date}
+                </Typography>
+              </Grid>
+            </Grid>
           </div>
         ))}
       </div>
-
-      {/*<div className="slideshowDots">
-        {itemsToShow.map((_, idx) => (
-          <div
-            key={idx}
-            className={`slideshowDot${index === idx ? " active" : ""}`}
-            onClick={() => {
-              setIndex(idx);
-            }}
-          ></div>
-        ))}
-      </div>*/}
     </div>
   );
 }

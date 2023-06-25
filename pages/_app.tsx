@@ -1,4 +1,4 @@
-import '@/styles/globals.css'
+import '@/styles/globals.scss'
 import type { AppProps } from 'next/app';
 
 import { Play, Press_Start_2P, Sofia_Sans_Extra_Condensed, Roboto } from '@next/font/google';
