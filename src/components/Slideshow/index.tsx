@@ -34,7 +34,7 @@ interface ISlideshowProps {
 function Slideshow(props: ISlideshowProps) {
   const { items } = props;
   const [index, setIndex] = React.useState(0);
-  const timeoutRef = React.useRef(null);
+  const timeoutRef = React.useRef<null | NodeJS.Timeout>(null);
 
   const [itemsToShow, setItemsToShow] = React.useState<IFeedbackClean[]>(items);
 
@@ -61,7 +61,7 @@ function Slideshow(props: ISlideshowProps) {
     return () => {
       resetTimeout();
     };
-  }, [index]);
+  }, [index, items.length]);
 
   function stringToColor(string: string) {
     let hash = 0;
