@@ -191,6 +191,7 @@ export default function Home(props: Props) {
                   href="https://www.mercadolibre.com.ar/perfil/GOODGAMING.DIGITALSTORE"
                   underline="hover"
                   color="white"
+                  target="_blank"
                 >
                   100% calificaciones positivas en Mercadolibre
                 </Link>
