@@ -12,6 +12,8 @@ import SocialButtons from "@/src/components/SocialButtons";
 import swipeAnimation from "@/public/images/swipe-animation.gif";
 import NintendoSlide from "@/src/components/slides/NintendoSlide";
 import PlaystationSlide from "@/src/components/slides/PlaystationSlide";
+import Slideshow from "@/src/components/Slideshow";
+import { Link, Typography } from "@mui/material";
 
 const GGLogo = () => (
   <Image
@@ -22,7 +24,12 @@ const GGLogo = () => (
   />
 );
 
-export default function Home() {
+interface Props {
+  feedbacks: IFeedbackClean[];
+}
+
+export default function Home(props: Props) {
+  const { feedbacks } = props;
   const [carouselIndex, setCarouselIndex] = useState(1);
 
   const handleChangeIndex = (index: number) => {
@@ -62,9 +69,8 @@ export default function Home() {
       <Grid
         container
         columns={16}
-        height={"20vh"}
         sx={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
-        padding={4}
+        padding={2}
       >
         <Grid
           container
@@ -72,7 +78,7 @@ export default function Home() {
           justifyContent={{
             lg: "flex-start",
             md: "flex-start",
-            sm: "flex-start",
+            sm: "center",
             xs: "center",
           }}
           alignItems="center"
@@ -94,7 +100,7 @@ export default function Home() {
           justifyContent={{
             lg: "flex-end",
             md: "flex-end",
-            sm: "flex-end",
+            sm: "center",
             xs: "center",
           }}
           alignItems="center"
@@ -122,6 +128,7 @@ export default function Home() {
         >
           <NintendoSlide />
         </Grid>
+        {/* Main slide */}
         <Grid
           container
           direction="row"
@@ -130,7 +137,7 @@ export default function Home() {
           height={"100vh"}
           padding={0}
         >
-           <Image
+          <Image
             alt="Good Gaming background"
             src="/images/home-bg.jpg"
             width="0"
@@ -144,17 +151,54 @@ export default function Home() {
               zIndex: "-1",
             }}
           />
-          {/* Main slide */}
           <Grid
             container
-            lg={5}
-            xs={8}
+            direction="row"
+            lg={6}
+            xs={10}
             md={8}
             justifyContent="center"
             alignItems="center"
+            rowSpacing={0}
+            textAlign="center"
+            spacing={1}
+            height={"70vh"}
+            paddingTop={{
+              sm: "10vh",
+              xs: "10vh",
+            }}
           >
-            <span className="homeFont">Tarjetas digitales</span>
-            <StoreButtons buttonsDefinition={buttonsStore} />
+            <Grid
+              item
+              columns={{
+                lg: 12,
+                md: 12,
+                sm: 11,
+                xs: 11,
+              }}
+            >
+              <span className="homeFont">Tarjetas digitales</span>
+            </Grid>
+            <Grid item xs={12}>
+              <StoreButtons buttonsDefinition={buttonsStore} />
+            </Grid>
+            <Grid item xs={12}>
+              <span className="homeFont" style={{ marginBottom: 0 }}>
+                Nuestros clientes
+              </span>
+              <Typography fontWeight="light" variant="subtitle1">
+                <Link
+                  href="https://www.mercadolibre.com.ar/perfil/GOODGAMING.DIGITALSTORE"
+                  underline="hover"
+                  color="white"
+                >
+                  100% calificaciones positivas en Mercadolibre
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              {feedbacks.length && <Slideshow items={feedbacks} />}
+            </Grid>
           </Grid>
         </Grid>
         <Grid
@@ -171,3 +215,75 @@ export default function Home() {
     </div>
   );
 }
+
+interface IFeedback {
+  rating_name: "Buena" | "Regular" | "Mala";
+  message: "Excelente";
+  user: {
+    nickname: string;
+  };
+  date: string;
+}
+
+export interface IFeedbackClean {
+  rating: "Buena" | "Regular" | "Mala";
+  user: string;
+  message: string;
+  date: string;
+}
+
+export const getStaticProps = async () => {
+  const FEEDBACK_URL =
+    "https://www.mercadolibre.com.ar/perfil/api/feedback/askForFeedback?userIdentifier=nickname%3DGOODGAMING.DIGITALSTORE&rating=all&limit=50&offset=0&role=seller";
+
+  const response = await fetch(FEEDBACK_URL);
+
+  if (!response.ok) {
+    return {
+      props: {
+        error: {
+          statusCode: response.status,
+          message: response.statusText,
+        },
+      },
+    };
+  }
+
+  const data = await response.json();
+
+  const feedbacks = data.feedbacks.map((feedback: IFeedback) => {
+    return {
+      user: feedback.user.nickname,
+      rating: feedback.rating_name,
+      message: feedback.message,
+      date: feedback.date,
+    };
+  });
+
+  // filter feedback with message longitud greater than 4 and not repeated users
+  const filteredFeedbacks = feedbacks
+    .filter((feedback: IFeedback) => {
+      return (
+        feedback.message &&
+        feedback.message.length > 4 &&
+        feedback.message.length < 80
+      );
+    })
+    .filter((feedback: IFeedback, index: number, self: IFeedback[]) => {
+      return (
+        index === self.findIndex((t: IFeedback) => t.user === feedback.user)
+      );
+    });
+
+  // order by date
+  const feedbacksOrderded = filteredFeedbacks.sort(
+    (a: IFeedback, b: IFeedback) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    }
+  );
+  return {
+    props: {
+      feedbacks: feedbacksOrderded,
+    },
+  };
+};
