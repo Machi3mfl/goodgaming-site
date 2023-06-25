@@ -24,6 +24,7 @@ const delay = 5000;
 import { IFeedbackClean } from "@/pages";
 import { Avatar, Grid, Paper, Rating, Typography } from "@mui/material";
 import React from "react";
+import RandomAvatarImg from "../random-avatar";
 
 interface ISlideshowProps {
   items: IFeedbackClean[];
@@ -71,7 +72,7 @@ function Slideshow(props: ISlideshowProps) {
               }}
             >
               <Grid item xs={12} display="flex" justifyContent="center" mb={1}>
-                <Avatar {...stringAvatar(item.user, index)} sizes="lg" />
+                <RandomAvatarImg username={item.user} width={40} height={40}/>
               </Grid>
               <Grid item xs={12} textAlign="center">
                 <Typography variant="caption" fontWeight="light">
