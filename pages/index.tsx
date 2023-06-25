@@ -162,11 +162,13 @@ export default function Home(props: Props) {
             rowSpacing={0}
             textAlign="center"
             spacing={1}
-            height={"70vh"}
             paddingTop={{
-              sm: "10vh",
-              xs: "10vh",
+              lg: "15vh",
+              md: "15vh",
+              sm: "25vh",
+              xs: "25vh",
             }}
+            paddingBottom={3}
           >
             <Grid
               item
