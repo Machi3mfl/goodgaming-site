@@ -123,7 +123,6 @@ export default function Header() {
           </Grid>
         </Toolbar>
       </Container>
-      {width}
     </AppBar>
   );
 }
