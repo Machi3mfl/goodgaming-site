@@ -1,135 +1,39 @@
-import Image from "next/image";
-import Grid from "@mui/material/Grid";
-import mainLogo from "@/public/images/logo-horizontal-dswhite.png";
-import { useState } from "react";
-import SwipeableViews from "@/src/packages/react-swipeable-views/src";
 
-// playstation
-import StoreButtons from "@/src/components/StoreButtons";
-import SocialButtons from "@/src/components/SocialButtons";
-
-// nintendo
-import swipeAnimation from "@/public/images/swipe-animation.gif";
-import NintendoSlide from "@/src/components/slides/NintendoSlide";
-import PlaystationSlide from "@/src/components/slides/PlaystationSlide";
-import Slideshow from "@/src/components/Slideshow";
-import { Link, Typography } from "@mui/material";
-
-const GGLogo = () => (
-  <Image
-    src={mainLogo}
-    loading="lazy"
-    alt={"good gaming digital store"}
-    style={{ width: "100%", height: "auto", cursor: "pointer" }}
-  />
-);
-
-interface Props {
-  feedbacks: IFeedbackClean[];
+type IndexPageProps = {
+	feedbacks: IFeedbackClean[];
 }
+type IndexPageRef = React.ForwardedRef<HTMLDivElement>
+import PageTransitions from '@/src/components/PageTransitions'
+import Slideshow from '@/src/components/Slideshow'
+import StoreButtons from '@/src/components/StoreButtons'
+import { Grid, Typography } from '@mui/material'
+import { Link as MuiLink } from '@mui/material';
+import { forwardRef } from 'react'
+import Image from 'next/image'
 
-export default function Home(props: Props) {
-  const { feedbacks } = props;
-  const [carouselIndex, setCarouselIndex] = useState(1);
+function IndexPage(props: IndexPageProps, ref: IndexPageRef) {
+	const { feedbacks } = props;
 
-  const handleChangeIndex = (index: number) => {
-    setCarouselIndex(index);
-  };
+	const buttonsStore = [
+		{
+		  url: "/images/nintendo-switch-eshop.jpeg",
+		  title: "Nintendo eShop",
+		  width: "50%",
+		  onClick: () => {
 
-  const buttonsStore = [
-    {
-      url: "/images/nintendo-switch-eshop.jpeg",
-      title: "Nintendo eShop",
-      width: "50%",
-      onClick: () => setCarouselIndex(0),
-    },
-    {
-      url: "/images/playstation-logo-buttons-blue.jpeg",
-      title: "Playstation Store",
-      width: "50%",
-      onClick: () => setCarouselIndex(2),
-    },
-  ];
+		  },
+		},
+		{
+		  url: "/images/playstation-logo-buttons-blue.jpeg",
+		  title: "Playstation Store",
+		  width: "50%",
+		  onClick: () => {},
+		},
+	  ];
 
-  return (
-    <div
-      tabIndex={0}
-      onKeyDown={(e) => {
-        const { key } = e;
-        if (key === "ArrowRight") {
-          carouselIndex === 0 && setCarouselIndex(1);
-          carouselIndex === 1 && setCarouselIndex(2);
-        }
-        if (key === "ArrowLeft") {
-          carouselIndex === 1 && setCarouselIndex(0);
-          carouselIndex === 2 && setCarouselIndex(1);
-        }
-      }}
-    >
-      <Grid
-        container
-        columns={16}
-        sx={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
-        padding={2}
-      >
-        <Grid
-          container
-          direction="row"
-          justifyContent={{
-            lg: "flex-start",
-            md: "flex-start",
-            sm: "center",
-            xs: "center",
-          }}
-          alignItems="center"
-          lg={3}
-          md={3}
-          sm={6}
-          xs={12}
-          onClick={() => setCarouselIndex(1)}
-        >
-          <GGLogo />
-        </Grid>
-        <Grid
-          lg={9}
-          md={9}
-          sm={6}
-          xs={12}
-          container
-          direction="row"
-          justifyContent={{
-            lg: "flex-end",
-            md: "flex-end",
-            sm: "center",
-            xs: "center",
-          }}
-          alignItems="center"
-        >
-          <SocialButtons />
-        </Grid>
-      </Grid>
-      {[0, 2].includes(carouselIndex) && (
-        <Image src={swipeAnimation} className="hideMe" alt="swipe slides" />
-      )}
-      <SwipeableViews
-        index={carouselIndex}
-        default
-        onChangeIndex={handleChangeIndex}
-        enableMouseEvents
-      >
-        {/* Nintendo slide */}
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          height={"100vh"}
-          padding={0}
-        >
-          <NintendoSlide />
-        </Grid>
-        {/* Main slide */}
-        <Grid
+	return (
+		<PageTransitions ref={ref}>
+			        <Grid
           container
           direction="row"
           justifyContent="center"
@@ -189,14 +93,14 @@ export default function Home(props: Props) {
                 Nuestros clientes
               </span>
               <Typography fontWeight="light" variant="subtitle1">
-                <Link
+                <MuiLink
                   href="https://www.mercadolibre.com.ar/perfil/GOODGAMING.DIGITALSTORE"
                   underline="hover"
                   color="white"
                   target="_blank"
                 >
                   100% calificaciones positivas en Mercadolibre
-                </Link>
+                </MuiLink>
               </Typography>
             </Grid>
             <Grid item xs={12}>
@@ -204,89 +108,81 @@ export default function Home(props: Props) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid
-          container
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          height={"100vh"}
-          padding={0}
-        >
-          <PlaystationSlide />
-        </Grid>
-      </SwipeableViews>
-    </div>
-  );
+		</PageTransitions>
+	)
 }
 
 interface IFeedback {
-  rating_name: "Buena" | "Regular" | "Mala";
-  message: "Excelente";
-  user: {
-    nickname: string;
-  };
-  date: string;
-}
-
-export interface IFeedbackClean {
-  rating: "Buena" | "Regular" | "Mala";
-  user: string;
-  message: string;
-  date: string;
-}
-
-export const getStaticProps = async () => {
-  const FEEDBACK_URL =
-    "https://www.mercadolibre.com.ar/perfil/api/feedback/askForFeedback?userIdentifier=nickname%3DGOODGAMING.DIGITALSTORE&rating=all&limit=60&offset=0&role=seller";
-
-  const response = await fetch(FEEDBACK_URL);
-
-  if (!response.ok) {
-    return {
-      props: {
-        error: {
-          statusCode: response.status,
-          message: response.statusText,
-        },
-      },
-    };
+	rating_name: "Buena" | "Regular" | "Mala";
+	message: "Excelente";
+	user: {
+	  nickname: string;
+	};
+	date: string;
   }
-
-  const data = await response.json();
-
-  const feedbacks = data.feedbacks.map((feedback: IFeedback) => {
-    return {
-      user: feedback.user.nickname,
-      rating: feedback.rating_name,
-      message: feedback.message,
-      date: feedback.date,
-    };
-  });
-
-  // filter feedback with message longitud greater than 4 and not repeated users
-  const filteredFeedbacks = feedbacks
-    .filter((feedback: IFeedback) => {
-      return (
-        feedback.message &&
-        feedback.message.length > 4 &&
-        feedback.message.length < 80
-      );
-    })
-    .filter((feedback: IFeedback, index: number, self: IFeedback[]) => {
-      return (
-        index === self.findIndex((t: IFeedback) => t.user === feedback.user)
-      );
-    });
-
-  // order by date
-  const feedbacksOrderded = filteredFeedbacks.sort(
-    (a: IFeedback, b: IFeedback) => {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    }
-  );
-  return {
-    props: {
-      feedbacks: feedbacksOrderded,
-    },
+  
+  export interface IFeedbackClean {
+	rating: "Buena" | "Regular" | "Mala";
+	user: string;
+	message: string;
+	date: string;
+  }
+  
+  export const getStaticProps = async () => {
+	const FEEDBACK_URL =
+	  "https://www.mercadolibre.com.ar/perfil/api/feedback/askForFeedback?userIdentifier=nickname%3DGOODGAMING.DIGITALSTORE&rating=all&limit=70&offset=0&role=seller";
+  
+	const response = await fetch(FEEDBACK_URL);
+  
+	if (!response.ok) {
+	  return {
+		props: {
+		  error: {
+			statusCode: response.status,
+			message: response.statusText,
+		  },
+		},
+	  };
+	}
+  
+	const data = await response.json();
+  
+	const feedbacks = data.feedbacks.map((feedback: IFeedback) => {
+	  return {
+		user: feedback.user.nickname,
+		rating: feedback.rating_name,
+		message: feedback.message,
+		date: feedback.date,
+	  };
+	});
+  
+	// filter feedback with message longitud greater than 4 and not repeated users
+	const filteredFeedbacks = feedbacks
+	  .filter((feedback: IFeedback) => {
+		return (
+		  feedback.message &&
+		  feedback.message.length > 4 &&
+		  feedback.message.length < 80
+		);
+	  })
+	  .filter((feedback: IFeedback, index: number, self: IFeedback[]) => {
+		return (
+		  index === self.findIndex((t: IFeedback) => t.user === feedback.user)
+		);
+	  });
+  
+	// order by date
+	const feedbacksOrderded = filteredFeedbacks.sort(
+	  (a: IFeedback, b: IFeedback) => {
+		return new Date(b.date).getTime() - new Date(a.date).getTime();
+	  }
+	);
+	return {
+	  props: {
+		feedbacks: feedbacksOrderded,
+	  },
+	};
   };
-};
+  
+
+export default forwardRef(IndexPage)

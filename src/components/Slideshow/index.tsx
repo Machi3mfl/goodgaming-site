@@ -21,7 +21,7 @@ const colors = [
 ];
 
 const delay = 5000;
-import { IFeedbackClean } from "@/pages";
+import { IFeedbackClean } from "@/pages/index-2";
 import { Avatar, Grid, Paper, Rating, Typography } from "@mui/material";
 import React from "react";
 import RandomAvatarImg from "../random-avatar";
