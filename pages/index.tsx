@@ -11,7 +11,7 @@ import { forwardRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { SiMercadopago } from "react-icons/si";
-import { BsHandThumbsUp } from "react-icons/bs";
+import { useRouter } from "next/router";
 
 const ScaleComponent = ({ children }: React.ComponentProps<any>) => (
   <motion.div
@@ -25,19 +25,24 @@ const ScaleComponent = ({ children }: React.ComponentProps<any>) => (
 
 function IndexPage(props: IndexPageProps, ref: IndexPageRef) {
   const { feedbacks } = props;
+  const router = useRouter();
 
   const buttonsStore = [
     {
       url: "/images/nintendo-switch-eshop.jpeg",
       title: "Nintendo eShop",
       width: "50%",
-      onClick: () => {},
+      onClick: () => {
+        router.push("/nintendo");
+      },
     },
     {
       url: "/images/playstation-logo-buttons-blue.jpeg",
       title: "Playstation Store",
       width: "50%",
-      onClick: () => {},
+      onClick: () => {
+        router.push("/playstation");
+      },
     },
   ];
 
