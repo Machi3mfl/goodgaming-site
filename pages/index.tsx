@@ -112,7 +112,7 @@ function IndexPage(props: IndexPageProps, ref: IndexPageRef) {
 	)
 }
 
-interface IFeedback {
+export interface IFeedback {
 	rating_name: "Buena" | "Regular" | "Mala";
 	message: "Excelente";
 	user: {
@@ -162,7 +162,7 @@ interface IFeedback {
 		return (
 		  feedback.message &&
 		  feedback.message.length > 4 &&
-		  feedback.message.length < 80
+		  feedback.message.length < 160
 		);
 	  })
 	  .filter((feedback: IFeedback, index: number, self: IFeedback[]) => {

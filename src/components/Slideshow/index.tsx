@@ -21,10 +21,10 @@ const colors = [
 ];
 
 const delay = 5000;
-import { IFeedbackClean } from "@/pages/index-2";
 import { Avatar, Grid, Paper, Rating, Typography } from "@mui/material";
 import React from "react";
 import RandomAvatarImg from "../random-avatar";
+import { IFeedbackClean } from "@/pages";
 
 interface ISlideshowProps {
   items: IFeedbackClean[];
@@ -32,22 +32,7 @@ interface ISlideshowProps {
 
 function Slideshow(props: ISlideshowProps) {
   const { items } = props;
-  const [index, setIndex] = React.useState(0);
-  const timeoutRef = React.useRef<null | NodeJS.Timeout>(null);
-
   const [itemsToShow, setItemsToShow] = React.useState<IFeedbackClean[]>(items);
-
-  // show only 6 items per time in the slideshow
-  // when the 6 items are shown, the slideshow will start again and show the next 6 items
-  // when all the items are shown, the slideshow will start again and show the first 6 items
-  function stringAvatar(name: string, index: number) {
-    return {
-      sx: {
-        bgcolor: colors[index % colors.length],
-      },
-      children: `${name[0].toUpperCase()}${name[5].toUpperCase()}`,
-    };
-  }
 
   return (
     <div className="slider">
@@ -81,7 +66,7 @@ function Slideshow(props: ISlideshowProps) {
               </Grid>
               <Grid item xs={12} textAlign="center" zeroMinWidth>
                 <Typography
-                  variant="h6"
+                  variant="subtitle1"
                   style={{
                     overflowWrap: "break-word",
                     wordBreak: "break-word",
