@@ -25,15 +25,6 @@ const Item = styled(Paper)(({ theme }) => ({
   boxShadow: "none",
 }));
 
-const ScaleComponent = ({ children }: React.ComponentProps<any>) => (
-  <motion.div
-    whileHover={{ scale: 2 }}
-    whileTap={{ scale: 2 }}
-    transition={{ duration: 0.4 }}
-  >
-    {children}
-  </motion.div>
-);
 
 const GGLogo = () => (
   <Image
