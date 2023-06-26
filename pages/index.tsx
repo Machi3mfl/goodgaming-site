@@ -105,7 +105,7 @@ function IndexPage(props: IndexPageProps, ref: IndexPageRef) {
             <ScaleComponent>
               <Typography
                 fontWeight="light"
-                variant="subtitle1"
+                variant="h6"
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
@@ -120,7 +120,7 @@ function IndexPage(props: IndexPageProps, ref: IndexPageRef) {
                   color="#fff"
                   target="_blank"
                 >
-                  100% calificaciones positivas <SiMercadopago size={20}/>
+                  100% calificaciones positivas <SiMercadopago size={21}/>
                 </MuiLink>
               </Typography>
             </ScaleComponent>
