@@ -10,7 +10,8 @@ import {
   Roboto,
 } from "@next/font/google";
 import Head from "next/head";
-import HeaderMenu from "@/src/components/layout/HeaderMenu";
+import HeaderMenu from "@/src/components/layout/header/Header";
+import Header from "@/src/components/layout/header/Header";
 
 const play = Play({ weight: "400", subsets: ["latin"] });
 const pressStart = Press_Start_2P({ weight: "400", subsets: ["latin"] });
@@ -38,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <title>Good Gaming Store</title>
       </Head>
-      <HeaderMenu />
+      <Header />
       <AnimatePresence onExitComplete={onExitComplete} mode="wait" initial={false}>
         <Component key={pageKey} {...pageProps} />  
       </AnimatePresence>
