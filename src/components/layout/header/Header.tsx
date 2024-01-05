@@ -101,7 +101,7 @@ export default function Header() {
         background:
           "linear-gradient(to bottom,  rgba(0,0,0,0.4) 0%,rgba(255,255,255,0) 100%)",
         boxShadow: "none",
-        padding: "1vh",
+        padding: "0.7vh",
       }}
     >
       <Container maxWidth="xl">
